@@ -320,7 +320,7 @@ function init_gear_sets()
 
     sets.defense.MEVA = {main="Malignance Pole",sub="Enki Strap",ammo="Epitaph",
         head="Amalric Coif +1",neck="Warder's Charm +1",ear1="Lugalbanda Earring",ear2="Sanare Earring",
-		body="Inyanga Jubbah +2",hands="Telchine Gloves",ring1="Vengeful Ring",Ring2="Purity Ring",
+		body="Inyanga Jubbah +2",hands="Telchine Gloves",ring1="Vengeful Ring",ring2="Purity Ring", -- [2026-11-22 Fix] Was: Ring2="Purity Ring"
         back="Aurist's Cape +1",waist="Luminary Sash",legs="Telchine Braconi",feet="Telchine Pigaches"}
 		
     sets.Kiting = {feet="Herald's Gaiters"}
@@ -350,7 +350,7 @@ function init_gear_sets()
     -- Normal melee group
     sets.engaged = {main="Gridarvor",sub="Bloodrain Strap",ammo="Epitaph",
         head="Beckoner's Horn +1",neck="Shulmanu Collar",ear1="Digni. Earring",ear2="Telos Earring",
-        body="Con. Doublet +3",hands="Gazu Bracelet +1",ring1="Ramuh Ring +1",ring2="Ramuh Ring +1",
+        body="Con. Doublet +3",hands="Gazu Bracelets +1",ring1="Ramuh Ring +1",ring2="Ramuh Ring +1", -- [2026-11-22 Fix] Was: "Gazu Bracelet +1"
         back=gear.phys_jse_back,waist="Olseni Belt",legs="Assid. Pants +1",feet="Convo. Pigaches +3"}
 end
 

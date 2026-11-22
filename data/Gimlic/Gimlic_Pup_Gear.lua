@@ -91,9 +91,9 @@ function init_gear_sets()
     sets.precast.JA['Tactical Switch'] = {feet="Karagoz Scarpe +1"}
     sets.precast.JA['Repair'] = {ammo="Automat. Oil +3",feet="Foire Babouches +3"} --feet="Foire Babouches"
 	sets.precast.JA['Maintenance'] = {ammo="Automat. Oil +3"}
-	sets.precast.JA['Overdrive']={bdoy="Pitre Tobe +3"}
+	sets.precast.JA['Overdrive']={body="Pitre Tobe +3"} -- [2026-11-22 Fix] Was: bdoy="Pitre Tobe +3"
 	sets.precast.JA['Ventriloquy']={legs="Foire Churidars +3"}
-	sets.precast.JA['Role Reversal']={feet="Pitre Churidars +3"}
+	sets.precast.JA['Role Reversal']={feet="Pitre Babouches +3"} -- [2026-11-22 Fix] Was: feet="Pitre Churidars +3" (leg armor in feet slot)
 
     sets.precast.JA.Maneuver = {body="Karagoz Farsetto +1",hands="Foire Dastanas +3",back="Visucius's Mantle",neck="Buffoon's Collar +1"} --neck="Buffoon's Collar",hands="Foire Dastanas",body="Cirque Farsetto +2",
 
@@ -156,10 +156,11 @@ function init_gear_sets()
 	sets.precast.WS['Tornado Kick'].FullAcc = set_combine(sets.precast.WS.FullAcc, {})
 	sets.precast.WS['Tornado Kick'].Fodder = set_combine(sets.precast.WS.Fodder, {})
 	
-    sets.precast.WS['Asuran Fists'] = set_combine(sets.precast.WS, {})
-    sets.precast.WS['Asuran Fists'].Acc = set_combine(sets.precast.WS.Acc, {})
-	sets.precast.WS['Asuran Fists'].FullAcc = set_combine(sets.precast.WS.FullAcc, {})
-	sets.precast.WS['Asuran Fists'].Fodder = set_combine(sets.precast.WS.Fodder, {})
+	-- [2026-11-22 Fix] Commented duplicate Asuran Fists block (already defined on lines 144-147)
+    --sets.precast.WS['Asuran Fists'] = set_combine(sets.precast.WS, {})
+    --sets.precast.WS['Asuran Fists'].Acc = set_combine(sets.precast.WS.Acc, {})
+	--sets.precast.WS['Asuran Fists'].FullAcc = set_combine(sets.precast.WS.FullAcc, {})
+	--sets.precast.WS['Asuran Fists'].Fodder = set_combine(sets.precast.WS.Fodder, {})
 	
     sets.precast.WS['Raging Fists'] = set_combine(sets.precast.WS, {})
     sets.precast.WS['Raging Fists'].Acc = set_combine(sets.precast.WS.Acc, {})

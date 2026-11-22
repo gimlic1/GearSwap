@@ -125,13 +125,13 @@ function init_gear_sets()
     -- Fast cast sets for spells
     
     sets.precast.FC = {main="Sakpata's Sword",ammo="Impatiens",
-		head="Sakpata's Helm",neck="Voltsurge Torque",ear1="Eriolation Earring",ear2="Moonshade Earring",
+		head="Sakpata's Helm",neck="Voltsurge Torque",ear1="Etiolation Earring",ear2="Moonshade Earring", -- [2026-11-22 Fix] Was: ear1="Eriolation Earring"
 		body="Rev. Surcoat +3",hands="Leyline Gloves",ring1="Lebeche Ring",ring2="Kishar Ring",
 		back=gear.fastcast_jse_back,waist="Flume Belt +1",legs="Enif Cosciales",feet="Odyssean Greaves"}
 		
     sets.precast.FC.DT = {ammo="Staunch Tathlum +1",
         head="Sakpata's Helm",neck="Loricate Torque +1",ear1="Odnowa Earring +1",ear2="Moonshade Earring",--ear2="Tuisto Earring"
-        body="Rev. Surcoat +3",hands="Sakpata's Gauntlets",ring1="Defendering Ring",ring2="Lebeche Ring",
+        body="Rev. Surcoat +3",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2="Lebeche Ring", -- [2026-11-22 Fix] Was: ring1="Defendering Ring"
         back="Moonbeam Cape",waist="Creed Baudrier",legs="Souv. Diechlings +1",feet="Sakpata's Leggings"}
 		
     sets.precast.FC['Enhancing Magic'] = set_combine(sets.precast.FC, {waist="Siegel Sash"})
@@ -264,7 +264,7 @@ function init_gear_sets()
     sets.midcast['Enhancing Magic'].SIRD = {main="Colada",ammo="Staunch Tathlum +1",
 		head="Souv. Schaller +1",neck="Moonlight Necklace",ear1="Andoaa Earring",ear2="Tuisto Earring",
 		body="Shab. Cuirass +1",hands="Sakpata's Gauntlets",--ring1="Defending Ring",ring2="Moonlight Ring",
-		back="Merciful Cape",waist="Olympus Sash",legs="Rev. Leggings +3",feet="Odyssean Greaves"}
+		back="Merciful Cape",waist="Olympus Sash",legs="Carmine Cuisses +1",feet="Odyssean Greaves"} -- [2026-11-22 Fix] Was: legs="Rev. Leggings +3" (feet item in legs slot; Carmine Cuisses +1 gives SIRD/Enhancing)
 
 	sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash"})
 
@@ -393,7 +393,7 @@ function init_gear_sets()
 	sets.defense.Tank = {ammo="Staunch Tathlum +1",
 		head="Chev. Armet +1",neck="Loricate Torque +1",ear1="Creed Earring",ear2="Thureous Earring",
 		body="Tartarus Platemail",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2="Shadow Ring",
-		back="Shadow Mantle",waist="Flume Belt +1",legs="Chev. Cuisses +1",ffeet="Sakpata's Leggings"}
+		back="Shadow Mantle",waist="Flume Belt +1",legs="Chev. Cuisses +1",feet="Sakpata's Leggings"} -- [2026-11-22 Fix] Was: ffeet="Sakpata's Leggings"
 		
 	sets.defense.MEVA = {main="Malignance Sword",sub="Aegis",ammo="Staunch Tathlum +1",
         head="Nyame Helm",neck="Warder's Charm +1",ear1="Etiolation Earring",ear2="Sanare Earring",
@@ -486,8 +486,9 @@ function init_gear_sets()
         body="Rev. Surcoat +3",hands="Sakpata's Gauntlets",ring1="Defending Ring",ring2="Moonlight Ring",
         back="Moonbeam Cape",waist="Flume Belt +1",legs=gear.odyssean_fc_legs,feet="Cab. Leggings +3"}
 		
-    sets.engaged.Reraise = set_combine(sets.engaged.Tank, sets.Reraise)
-    sets.engaged.Acc.Reraise = set_combine(sets.engaged.Acc.Tank, sets.Reraise)
+	-- [2026-11-22 Note] sets.Reraise and sets.engaged.Acc.Tank are not defined yet; guarded with fallbacks so set_combine does not receive nil
+    sets.engaged.Reraise = set_combine(sets.engaged.Tank, sets.Reraise or {}) -- [2026-11-22 Fix] Was: set_combine(sets.engaged.Tank, sets.Reraise)
+    sets.engaged.Acc.Reraise = set_combine(sets.engaged.Acc.Tank or sets.engaged.Tank, sets.Reraise or {}) -- [2026-11-22 Fix] Was: set_combine(sets.engaged.Acc.Tank, sets.Reraise)
 		
 	--------------------------------------
 	-- Custom buff sets
@@ -522,22 +523,22 @@ end
 
 function BurtgangTP()
 	
-	local player1 = windower.ffxi.get_player()
-	local mob = windower.ffxi.get_mob_by_target()
+	-- [2026-11-22 Fix] Was: local player1 = windower.ffxi.get_player() (unused) and windower.ffxi.get_mob_by_target() without 't', plus engaged/distance checks (< 6 yalms for WS, < 20 yalms for Flash)
+	local mob = windower.ffxi.get_mob_by_target('t')
 	local abil_recasts = windower.ffxi.get_ability_recasts()
 	local spell_recasts = windower.ffxi.get_spell_recasts()
 	
-	if mob == nil then
+	if mob == nil or player.status ~= 'Engaged' then
 		return false
 
 	
-	elseif mob.hpp <= 20 and player.tp >=1000 then
+	elseif mob.hpp <= 20 and player.tp >= 1000 and mob.distance < 36 then -- [2026-11-22 Fix] Added mob.distance < 36 (6 yalms)
 		
 		windower.chat.input('/ws "Atonement" <t>')
 		tickdelay = os.clock() + 2.8
 		return true
 	
-	elseif spell_recasts[112] < spell_latency then
+	elseif spell_recasts[112] < spell_latency and mob.distance < 400 then -- [2026-11-22 Fix] Added mob.distance < 400 (20 yalms)
 		windower.chat.input('/ma "Flash" <t>')
 		tickdelay = os.clock() + 1.1
 		return true

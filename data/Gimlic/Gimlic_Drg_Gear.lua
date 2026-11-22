@@ -113,7 +113,7 @@ function init_gear_sets()
 	-- Default set for any weaponskill that isn't any more specifically defined
 	
 	sets.precast.WS = {ammo="Knobkierrie",
-		head="Ptero. Armet +3",neck="Dgn. Collar +2",ear1="Thud Earring",ear2="Sherida Earring",
+		head="Ptero. Armet +3",neck="Dgn. Collar +2",ear1="Thrud Earring",ear2="Sherida Earring", -- [2026-11-22 Fix] Was: ear1="Thud Earring"
 		body="Gleti's Cuirass",hands="Sulev. Gauntlets +2",ring1="Regal Ring",ring2="Niqmaddu Ring",
 		back="Brigantia's Mantle",waist="Fotia Belt",legs="Sulev. Cuisses +2",feet="Sulev. Leggings +2"}
 		
@@ -122,7 +122,7 @@ function init_gear_sets()
 	sets.precast.WS.FullAcc = set_combine(sets.precast.WS, {ammo="Knobkierrie",back="Vespid Mantle",legs="Vishap Brais +3",feet="Vishap Greaves +3",ring2="Rufescent Ring",neck="Fotia Gorget"})
 	
 	sets.precast.WS.Fodder = {ammo="Knobkierrie",
-		head="Flam. Zucchetto +2",neck="Dgn. Collar +2",ear1="Thud Earring",ear2="Sherida Earring",
+		head="Flam. Zucchetto +2",neck="Dgn. Collar +2",ear1="Thrud Earring",ear2="Sherida Earring", -- [2026-11-22 Fix] Was: ear1="Thud Earring"
 		body="Gleti's Cuirass",hands="Gleti's Gauntlets",ring1="Regal Ring",ring2="Niqmaddu Ring",
 		back="Brigantia's Mantle",waist="Fotia Belt",legs="Gleti's Breeches",feet="Sulev. Leggings +2"}
 	
@@ -165,7 +165,7 @@ function init_gear_sets()
 	sets.precast.WS['Geirskogul'].Fodder = set_combine(sets.precast.WS.Fodder, {head="Gleti's Mask",hands="Pteroslaver Finger Gauntlets +3",ear2="Ishvara Earring",legs="Vishap Brais +3",feet="Gleti's Boots"})
 	
 	sets.precast.WS['Leg Sweep'] = {ammo="Knobkierrie",
-		head="Flam. Zucchetto +2",neck="Fotia Belt",ear1="Thud Earring",ear2="Sherida Earring",
+		head="Flam. Zucchetto +2",neck="Fotia Gorget",ear1="Thrud Earring",ear2="Sherida Earring", -- [2026-11-22 Fix] Was: neck="Fotia Belt",ear1="Thud Earring" (waist item in neck slot)
 		body="Flamma Korazin +2",hands="Flam. Manopolas +2",ring1="Flamma Ring",ring2="Niqmaddu Ring",
 		back="Brigantia's Mantle",waist="Fotia Belt",legs="Flamma Dirs +2",feet="Flam. Gambieras +2"}
 		
@@ -279,7 +279,7 @@ function init_gear_sets()
 		body="Gleti's Cuirass",hands="Nyame Gauntlets",ring1="Petrov Ring",ring2="Niqmaddu Ring",
 		back="Brigantia's Mantle",waist="Ioskeha Belt",legs="Nyame Flanchard",feet="Flam. Gambieras +2"}
 	
-	sets.engaged.Hybrid = set_combine(sets.engaged, {Head="Loess Barbuta +1",neck ="Dragoon's Collar +2",
+	sets.engaged.Hybrid = set_combine(sets.engaged, {head="Loess Barbuta +1",neck ="Dragoon's Collar +2", -- [2026-11-22 Fix] Was: Head="Loess Barbuta +1"
 		body="Hjarrandi Breastplate",ring1="Vocane Ring",ring2="Defending Ring"})
 	
     sets.engaged.AM = {}
@@ -360,49 +360,39 @@ function check_breath()
 	    
 	for i=1,party.count do
 		
-		if party[i].mob == nil and player.status == 'Engaged' then
-			return false
-		end
-		
-		if state.AutoBreathMode.value and player.status == 'Engaged' and pet.isvalid and (party[i].hpp < Breath_HPP - 15 or pet.hpp < 50) and party[i].mob.distance < 14  then
+		-- [2026-11-22 Fix] Was: if party[i].mob == nil ... return false / if party[i].hpp == 0 then return false (which aborted the whole loop on the first out-of-range/KO member), and party[i].mob.distance < 14 (196 squared yalms = 14 yalms)
+		if state.AutoBreathMode.value and player.status == 'Engaged' and pet.isvalid and party[i] and party[i].mob and party[i].hpp > 0 and (party[i].hpp < Breath_HPP - 15 or pet.hpp < 50) and party[i].mob.distance < 196 then
 			
 			local abil_recasts = windower.ffxi.get_ability_recasts()
 			local spell_recasts = windower.ffxi.get_spell_recasts()
 			
-			--if party[i].buffactive.KO == nil then
-				--return false
-			if party[i].hpp == 0 then
-				return false
-			else
-				if abil_recasts[164] < latency and party[i].hpp < 30 and pet.distance < 6.25 and not buffactive[amnesia] then
-					windower.chat.input('/ja "Deep Breathing" <me>')
-					tickdelay = os.clock() + 1.1
-					return true
-				elseif abil_recasts[149] < latency and pet.distance < 6.25 and not buffactive[amnesia] then
-					windower.chat.input('/ja "Spirit Bond" <me>')
-					tickdelay = os.clock() + 1.1
-					return true
-				elseif abil_recasts[239] < latency and not buffactive[amnesia] then
-					windower.chat.input('/ja "Restoring Breath" <me>')
-					tickdelay = os.clock() + 5.1
-					return true
-				elseif spell_recasts[23] < spell_latency and (player.sub_job == 'WHM' or player.sub_job == 'RDM') and party[i].hpp < Breath_HPP - 15 then
-					windower.chat.input('/ma "Dia" <t>')
-					tickdelay = os.clock() + 1.1
-					return true
-				elseif spell_recasts[159] < spell_latency and (player.sub_job == 'BLM' or player.sub_job == 'RDM') and party[i].hpp < Breath_HPP - 15 then
-					windower.chat.input('/ma "Stone" <t>')
-					tickdelay = os.clock() + 1.1
-					return true
-				elseif abil_recasts[70] < latency and pet.distance < 6.25 and not buffactive[amnesia] then
-					windower.chat.input('/ja "Steady Wing" <me>')
-					tickdelay = os.clock() + 1.1
-					return true
-				else
-					return false
-				end
+			if abil_recasts[164] < latency and party[i].hpp < 30 and pet.distance < 36 and not buffactive['Amnesia'] then -- [2026-11-22 Fix] Was: pet.distance < 6.25 and not buffactive[amnesia] (36 squared yalms = 6 yalms; unquoted amnesia was nil)
+				windower.chat.input('/ja "Deep Breathing" <me>')
+				tickdelay = os.clock() + 1.1
+				return true
+			elseif abil_recasts[149] < latency and pet.distance < 36 and not buffactive['Amnesia'] then -- [2026-11-22 Fix] Was: pet.distance < 6.25 and not buffactive[amnesia]
+				windower.chat.input('/ja "Spirit Bond" <me>')
+				tickdelay = os.clock() + 1.1
+				return true
+			elseif abil_recasts[239] < latency and not buffactive['Amnesia'] then -- [2026-11-22 Fix] Was: not buffactive[amnesia]
+				windower.chat.input('/ja "Restoring Breath" <me>')
+				tickdelay = os.clock() + 5.1
+				return true
+			elseif spell_recasts[23] < spell_latency and (player.sub_job == 'WHM' or player.sub_job == 'RDM') and party[i].hpp < Breath_HPP - 15 then
+				windower.chat.input('/ma "Dia" <t>')
+				tickdelay = os.clock() + 1.1
+				return true
+			elseif spell_recasts[159] < spell_latency and (player.sub_job == 'BLM' or player.sub_job == 'RDM') and party[i].hpp < Breath_HPP - 15 then
+				windower.chat.input('/ma "Stone" <t>')
+				tickdelay = os.clock() + 1.1
+				return true
+			elseif abil_recasts[70] < latency and pet.distance < 36 and not buffactive['Amnesia'] then -- [2026-11-22 Fix] Was: pet.distance < 6.25 and not buffactive[amnesia]
+				windower.chat.input('/ja "Steady Wing" <me>')
+				tickdelay = os.clock() + 1.1
+				return true
 			end
         end
     end
+	return false -- [2026-11-22 Fix] Return false after checking all party members instead of inside the else branch of member i=1
 end
 

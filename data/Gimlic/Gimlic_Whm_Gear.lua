@@ -91,7 +91,7 @@ function init_gear_sets()
 	sets.precast.JA.Martyr = {hands="Piety Mitts +3"}
 	sets.precast.JA['Afflatus Misery'] = {legs="Piety Pantaln. +3"}
 	sets.precast.JA['Afflatus Solace'] = {body="Ebers bliaut +1",feet="Piety Duckbills +3"}
-	sets.precast.JA['Devine Caress'] = {hands="Ebers mitts +1"}
+	sets.precast.JA['Divine Caress'] = {hands="Ebers Mitts +1"} -- [2026-11-22 Fix] Was: sets.precast.JA['Devine Caress'] = {hands="Ebers mitts +1"}
 
     -- Waltz set (chr and vit)
     sets.precast.Waltz = {
@@ -264,7 +264,7 @@ function init_gear_sets()
 
 	sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {main="Vadose Rod",sub="Ammurapi Shield",hands="Regal Cuffs",waist="Emphatikos Rope",legs="Shedir Seraweels"})
 
-	sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {main="Bolelabunga",hands="Ebers Mitts +1",legs="Theophany Pantaloons +3",body="Piety Briault+3"})
+	sets.midcast.Regen = set_combine(sets.midcast['Enhancing Magic'], {main="Bolelabunga",hands="Ebers Mitts +1",legs="Theophany Pantaloons +3",body="Piety Bliaut +3"}) -- [2026-11-22 Fix] Was: body="Piety Briault+3"
 	
 	sets.midcast.Protect = set_combine(sets.midcast['Enhancing Magic'], {ring2="Sheltered Ring",feet="Piety Duckbills +3",ear1="Gifted Earring",waist="Sekhmet Corset"})
 	sets.midcast.Protectra = set_combine(sets.midcast['Enhancing Magic'], {ring2="Sheltered Ring",feet="Piety Duckbills +3",ear1="Gifted Earring",waist="Sekhmet Corset"})
@@ -338,12 +338,12 @@ function init_gear_sets()
 
 	sets.midcast['Enfeebling Magic'] = {main="Daybreak",sub="Ammurapi Shield",ammo="Pemphredo Tathlum",
 		head="Befouled Crown",neck="Erra Pendant",ear1="Nourish. Earring +1",ear2="Digni. Earring",
-		body="Theophany Briault +2",hands="Theophany Mitts +3",ring1="Kishar Ring",ring2="Stikini Ring +1",
+		body="Theo. Bliaut +3",hands="Theophany Mitts +3",ring1="Kishar Ring",ring2="Stikini Ring +1", -- [2026-11-22 Fix] Was: body="Theophany Briault +2" (not in res/items.lua; Gimlic owns Theo. Bliaut +3 on line 161)
 		back="Aurist's Cape +1",waist="Luminary Sash",legs="Chironic Hose",feet="Uk'uxkaj Boots"}
 
 	sets.midcast['Enfeebling Magic'].Resistant = {main="Daybreak",sub="Ammurapi Shield",ammo="Pemphredo Tathlum",
 		head="Befouled Crown",neck="Erra Pendant",ear1="Nourish. Earring +1",ear2="Digni. Earring",
-		body="Theophany Briault +2",hands="Theophany Mitts +3",ring1="Metamor. Ring +1",ring2="Stikini Ring +1",
+		body="Theo. Bliaut +3",hands="Theophany Mitts +3",ring1="Metamor. Ring +1",ring2="Stikini Ring +1", -- [2026-11-22 Fix] Was: body="Theophany Briault +2" (not in res/items.lua; Gimlic owns Theo. Bliaut +3 on line 161)
 		back="Aurist's Cape +1",waist="Luminary Sash",legs="Chironic Hose",feet="Uk'uxkaj Boots"}
 		
 	sets.midcast.Dia = set_combine(sets.midcast['Enfeebling Magic'], sets.TreasureHunter)
@@ -404,7 +404,7 @@ function init_gear_sets()
 
     sets.defense.MEVA = {ammo="Staunch Tathlum +1",
         head="Telchine Cap",neck="Warder's Charm +1",ear1="Etiolation Earring",ear2="Sanare Earring",
-		body="Inyanga Jubbah +2",hands="Telchine Gloves",ring1="Vengeful Ring",Ring2="Purity Ring",
+		body="Inyanga Jubbah +2",hands="Telchine Gloves",ring1="Vengeful Ring",ring2="Purity Ring", -- [2026-11-22 Fix] Was: Ring2="Purity Ring"
         back="Aurist's Cape +1",waist="Luminary Sash",legs="Telchine Braconi",feet="Telchine Pigaches"}
 		
 		-- Engaged sets
@@ -417,22 +417,22 @@ function init_gear_sets()
     -- Basic set for if no TP weapon is defined.
     sets.engaged = {ammo="Staunch Tathlum +1",
         head="Aya. Zucchetto +2",neck="Asperity Necklace",ear1="Mache Earring",ear2="Brutal Earring",
-		body="Ayanmo Corazza +2",hands="Aya. Manopolas +2",ring1="Petrov Ring",Ring2="Ilabrat Ring",
+		body="Ayanmo Corazza +2",hands="Aya. Manopolas +2",ring1="Petrov Ring",ring2="Ilabrat Ring", -- [2026-11-22 Fix] Was: Ring2="Ilabrat Ring"
         back="Kayapa Cape",waist="Windbuffet Belt +1",legs="Aya. Cosciales +2",feet="Battlecast Gaiters"}
 
     sets.engaged.Acc = {ammo="Hasty Pinion +1",
         head="Aya. Zucchetto +2",neck="Combatant's Torque",ear1="Telos Earring",ear2="Brutal Earring",
-		body="Ayanmo Corazza +2",hands="Aya. Manopolas +2",ring1="Petrov Ring",Ring2="Ilabrat Ring",
+		body="Ayanmo Corazza +2",hands="Aya. Manopolas +2",ring1="Petrov Ring",ring2="Ilabrat Ring", -- [2026-11-22 Fix] Was: Ring2="Ilabrat Ring"
         back="Kayapa Cape",waist="Olseni Belt",legs="Aya. Cosciales +2",feet="Aya. Gambieras +2"}
 
 	sets.engaged.DW = {ammo="Staunch Tathlum +1",
         head="Aya. Zucchetto +2",neck="Asperity Necklace",ear1="Telos Earring",ear2="Suppanomimi",
-		body="Ayanmo Corazza +2",hands="Aya. Manopolas +2",ring1="Petrov Ring",Ring2="Ilabrat Ring",
+		body="Ayanmo Corazza +2",hands="Aya. Manopolas +2",ring1="Petrov Ring",ring2="Ilabrat Ring", -- [2026-11-22 Fix] Was: Ring2="Ilabrat Ring"
         back="Kayapa Cape",waist="Shetal Stone",legs="Aya. Cosciales +2",feet="Battlecast Gaiters"}
 
     sets.engaged.DW.Acc = {ammo="Hasty Pinion +1",
         head="Aya. Zucchetto +2",neck="Combatant's Torque",ear1="Telos Earring",ear2="Suppanomimi",
-		body="Ayanmo Corazza +2",hands="Aya. Manopolas +2",ring1="Petrov Ring",Ring2="Ilabrat Ring",
+		body="Ayanmo Corazza +2",hands="Aya. Manopolas +2",ring1="Petrov Ring",ring2="Ilabrat Ring", -- [2026-11-22 Fix] Was: Ring2="Ilabrat Ring"
         back="Kayapa Cape",waist="Shetal Stone",legs="Aya. Cosciales +2",feet="Aya. Gambieras +2"}
 
 		-- Buff sets: Gear that needs to be worn to actively enhance a current player buff.
@@ -470,10 +470,10 @@ function check_heal()
 	local spell_recasts = windower.ffxi.get_spell_recasts()
 	
 	-- doom and charm check
-	for i=1,1 do  
-		if state.AutoHealMode.value and party[i].mob.distance < 20 and party[i].hpp > 0 and player.mp > 50 and player.hp > 0 then
+	for i=1,party.count do -- [2026-11-22 Fix] Was: for i=1,1 do
+		if state.AutoHealMode.value and party[i] and party[i].mob and party[i].mob.distance < 400 and party[i].hpp > 0 and player.mp > 50 and player.hp > 0 then -- [2026-11-22 Fix] Was: party[i].mob.distance < 20 without nil check (400 squared yalms = 20 yalms)
 						
-			if abil_recasts[32] < latency then
+			if abil_recasts[32] < latency and not buffactive['Divine Caress'] and (party[i].buffactive.paralysis or party[i].buffactive.silence or party[i].buffactive.petrification or party[i].buffactive.poison or party[i].buffactive.blindness or party[i].buffactive.disease or party[i].buffactive.plagued) then -- [2026-11-22 Fix] Was: if abil_recasts[32] < latency then (fired unconditionally every 60s even when healthy)
 				windower.chat.input('/ja "Divine Caress" <me>')
 				tickdelay = os.clock() + 1.1
 				return true
@@ -496,8 +496,8 @@ function check_heal()
 				
 	-- rest of debuffs
 	
-	for i=1,1 do  
-		if state.AutoHealMode.value and party[i].mob.distance < 20 and party[i].hpp > 0 and player.mp > 50 and player.hp > 0 then
+	for i=1,party.count do -- [2026-11-22 Fix] Was: for i=1,1 do
+		if state.AutoHealMode.value and party[i] and party[i].mob and party[i].mob.distance < 400 and party[i].hpp > 0 and player.mp > 50 and player.hp > 0 then -- [2026-11-22 Fix] Was: party[i].mob.distance < 20 without nil check (400 squared yalms = 20 yalms)
 			
 			if spell_recasts[7] < spell_latency and party[i].buffactive.sleep and not party[i].buffactive.charm then
 				windower.chat.input('/ma "Curaga" "'..party[i].name..'"')
@@ -523,11 +523,11 @@ function check_heal()
 				windower.chat.input('/ma "Silena" "'..party[i].name..'"')
 				tickdelay = os.clock() + 2
 				return true
-			elseif spell_recasts[16] < spell_latency and party[i].buffactive.blindness and not party[i].name == 'Clintbeastwood' then
+			elseif spell_recasts[16] < spell_latency and party[i].buffactive.blindness and party[i].name ~= 'Clintbeastwood' then -- [2026-11-22 Fix] Was: not party[i].name == 'Clintbeastwood' (always evaluated to false)
 				windower.chat.input('/ma "Blindna" "'..party[i].name..'"')
 				tickdelay = os.clock() + 2
 				return true	
-			elseif spell_recasts[14] < spell_latency and party[i].buffactive.poision then
+			elseif spell_recasts[14] < spell_latency and party[i].buffactive.poison then -- [2026-11-22 Fix] Was: party[i].buffactive.poision
 				windower.chat.input('/ma "Poisona" "'..party[i].name..'"')
 				tickdelay = os.clock() + 2
 				return true
@@ -540,12 +540,12 @@ function check_heal()
 		end
 	end
 	for i=1,party.count do  
-		if state.AutoHealMode.value and party[i].mob.distance < 20 and player.hp > 0 then		
+		if state.AutoHealMode.value and party[i] and party[i].mob and party[i].mob.distance < 400 and player.hp > 0 then -- [2026-11-22 Fix] Was: party[i].mob.distance < 20 without nil check (400 squared yalms = 20 yalms)
 			if spell_recasts[494] < spell_latency and party[i].hp==0 and player.mp>300 then
 				windower.chat.input('/ma "Arise" "'..party[i].name..'"')
 				tickdelay = os.clock() + 10
 				return true
-			elseif abil_recasts[28] < latency and party[i].mob.distance < 8 and not party[i].name == player.name and not party[i].max_mp == party[i].mp then
+			elseif abil_recasts[28] < latency and party[i].mob.distance < 64 and party[i].name ~= player.name and party[i].max_mp ~= party[i].mp then -- [2026-11-22 Fix] Was: party[i].mob.distance < 8 and not party[i].name == player.name and not party[i].max_mp == party[i].mp (64 squared yalms = 8 yalms)
 				if party[i].max_mp - party[i].mp > 500 then
 					windower.chat.input('/ja "Devotion" "'..party[i].name..'"')
 					tickdelay = os.clock() + 1.1
@@ -566,7 +566,7 @@ if state.AutoHealMode.value and spell_recasts[54] < spell_latency and not buffac
 		tickdelay = os.clock() + 1.1
 		return true
 	end	
-	windower.chat.input('/ma "Stone Skin" <me>')
+	windower.chat.input('/ma "Stoneskin" <me>') -- [2026-11-22 Fix] Was: '/ma "Stone Skin" <me>'
 	tickdelay = os.clock() + 5
 	return true
 end

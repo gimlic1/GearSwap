@@ -196,7 +196,7 @@ function init_gear_sets()
 
 	sets.defense.MEVA = {ammo="Yamarang",
 		head="Dampening Tam",neck="Warder's Charm +1",ear1="Etiolation Earring",ear2="Sanare Earring",
-		body="Mekosu. Harness",hands="Leyline Gloves",ring1="Vengeful Ring",Ring2="Purity Ring",
+		body="Mekosu. Harness",hands="Leyline Gloves",ring1="Vengeful Ring",ring2="Purity Ring", -- [2026-11-22 Fix] Was: Ring2="Purity Ring"
 		back="Toro Cape",waist="Engraved Belt",legs="Samnuha Tights",feet="Ahosi Leggings"}
 
 

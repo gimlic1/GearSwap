@@ -287,7 +287,7 @@ function job_get_spell_map(spell, default_spell_map)
 			if state.Weapons.value ~= 'None' then
 				if state.Buff['Afflatus Solace'] then
 					if world.weather_element == 'Light' then
-						return '"MeleeLightWeatherCureSolace'
+						return 'MeleeLightWeatherCureSolace' -- [2026-11-22 Fix] Was: return '"MeleeLightWeatherCureSolace' (stray double-quote inside string broke set lookup)
 					elseif world.day_element == 'Light' then
 						return 'MeleeLightDayCureSolace'
 					else
@@ -385,6 +385,7 @@ function job_tick()
 	if check_arts() then return true end
 	if check_buff() then return true end
 	if check_buffup() then return true end
+	if check_heal and check_heal() then return true end -- [2026-11-22 Fix] Invoke character-defined AutoHealMode check_heal()
 	return false
 end
 

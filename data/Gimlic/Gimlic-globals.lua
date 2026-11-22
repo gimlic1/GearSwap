@@ -118,13 +118,12 @@ bayld_items = {'Tlalpoloani','Macoquetza','Camatlatia','Icoyoca','Tlamini','Suij
 
 function bells()
 --carols of the bells
-local send_comand = windower.chat.input()
+-- [2026-11-22 Fix] Was: local send_comand = windower.chat.input() and 16 separate send_command calls inside loop that all fired on frame 0 without accumulated wait
+	local cmd = ''
 	for i=1,16 do
-		send_command('input /bell b3; wait 2')
-		send_command('input /bell a3; wait 1')
-		send_command('input /bell b3; wait 1')
-		send_command('input /bell g3; wait 2')
+		cmd = cmd .. 'input /bell b3; wait 2; input /bell a3; wait 1; input /bell b3; wait 1; input /bell g3; wait 2; '
 	end
+	send_command(cmd)
 end
 
 

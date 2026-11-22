@@ -68,7 +68,7 @@ function init_gear_sets()
 	
 	sets.precast.FC = {ammo="Impatiens",
 	head=gear.herculean_fc_head,neck="Voltsurge Torque",ear1="Enchntr. Earring +1",ear2="Loquac. Earring",
-	body="Dread Jupon",hands="Leyline Gloves",ring2="Lebeche Ring",ring2="Kishar Ring",
+	body="Dread Jupon",hands="Leyline Gloves",ring1="Lebeche Ring",ring2="Kishar Ring", -- [2026-11-22 Fix] Was: duplicate ring2=
 	legs="Rawhide Trousers"}
 
 	sets.precast.FC.Utsusemi = set_combine(sets.precast.FC, {neck="Magoraga Beads",body="Passion Jacket"})
@@ -197,7 +197,7 @@ function init_gear_sets()
 		
 	sets.defense.MEVA = {ammo="Staunch Tathlum +1",
 		head=empty,neck="Warder's Charm +1",ear1="Etiolation Earring",ear2="Sanare Earring",
-		body="Respite Cloak",hands="Leyline Gloves",ring1="Vengeful Ring",Ring2="Purity Ring",
+		body="Respite Cloak",hands="Leyline Gloves",ring1="Vengeful Ring",ring2="Purity Ring", -- [2026-11-22 Fix] Was: Ring2="Purity Ring"
 		back="Toro Cape",waist="Flax Sash",legs="Samnuha Tights",feet="Malignance Boots"}
 
 	sets.Kiting = {feet="Herald's Gaiters"}

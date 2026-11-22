@@ -89,7 +89,7 @@ send_command('bind !^p send @all /pcmd leave')
 
 
 
-send_command("lua r enternity")
+send_command("lua r eternity") -- [2026-11-22 Fix] Was: "lua r enternity"
 send_command("lua r fastcs")
 send_command("lua r TreasuryVOI")
 
@@ -125,11 +125,17 @@ bayld_items = {'Tlalpoloani','Macoquetza','Camatlatia','Icoyoca','Tlamini','Suij
 
 function bells()
 --carols of the bells
-local send_comand = windower.chat.input()
+-- [2026-11-22 Fix] Was: active windower.chat.input() call and separate wait N commands that all fired on frame 0
+-- local send_comand = windower.chat.input()
+	local delay = 0
 	for i=1,16 do
-		send_command('input /bell b3; wait 2')
-		send_command('input /bell a3; wait 1')
-		send_command('input /bell b3; wait 1')
-		send_command('input /bell g3; wait 2')
+		send_command((delay > 0 and 'wait '..delay..'; ' or '')..'input /bell b3')
+		delay = delay + 2
+		send_command('wait '..delay..'; input /bell a3')
+		delay = delay + 1
+		send_command('wait '..delay..'; input /bell b3')
+		delay = delay + 1
+		send_command('wait '..delay..'; input /bell g3')
+		delay = delay + 2
 	end
 end

@@ -77,7 +77,7 @@ function init_gear_sets()
 	sets.precast.FC = {ammo="Impatiens",
 		head="Carmine Mask +1",neck="Voltsurge Torque",ear1="Etiolation Earring",ear2="Moonshade Earring",
 		body="Taeon Tabard",hands="Leyline Gloves",ring1="Lebeche Ring",ring2="Prolix Ring",
-		back="Moonbeam Cape",waist="Flume Belt +1",legs="Founder's Greaves",feet="Carmine Greaves +1"}
+		back="Moonbeam Cape",waist="Flume Belt +1",legs="Founder's Hose",feet="Carmine Greaves +1"} -- [2026-11-22 Fix] Was: legs="Founder's Greaves" (feet item in legs slot)
 	
 	-- Waltz set (chr and vit)
 	sets.precast.Waltz = {}
@@ -87,15 +87,15 @@ function init_gear_sets()
 
 	sets.midcast.Cure = {}
 	
-	sets.Self_Healing = {neck="Phalaina Locket",hands="Buremte Gloves",ring2="Kunaji Ring",waist="Gishdubar Sash",ring2="Vocane Ring"}
-	sets.Cure_Received = {neck="Phalaina Locket",hands="Buremte Gloves",ring2="Kunaji Ring",waist="Gishdubar Sash",ring2="Vocane Ring"}
+	sets.Self_Healing = {neck="Phalaina Locket",hands="Buremte Gloves",ring1="Vocane Ring",waist="Gishdubar Sash",ring2="Kunaji Ring"} -- [2026-11-22 Fix] Was: duplicate ring2= (ring2="Kunaji Ring",...,ring2="Vocane Ring")
+	sets.Cure_Received = {neck="Phalaina Locket",hands="Buremte Gloves",ring1="Vocane Ring",waist="Gishdubar Sash",ring2="Kunaji Ring"} -- [2026-11-22 Fix] Was: duplicate ring2= (ring2="Kunaji Ring",...,ring2="Vocane Ring")
 	sets.Self_Refresh = {waist="Gishdubar Sash"}
 	
 	-- Midcast Sets
 	sets.midcast.FastRecast = {ammo="Staunch Tathlum +1",
 		head="Carmine Mask +1",neck="Voltsurge Torque",ear1="Enchntr. Earring +1",ear2="Loquac. Earring",
 		body="Taeon Tabard",hands="Leyline Gloves",ring1="Lebeche Ring",ring2="Prolix Ring",
-		back="Moonbeam Cape",waist="Tempus Fugit",legs="Founder's Greaves",feet="Carmine Greaves +1"}
+		back="Moonbeam Cape",waist="Tempus Fugit",legs="Founder's Hose",feet="Carmine Greaves +1"} -- [2026-11-22 Fix] Was: legs="Founder's Greaves" (feet item in legs slot)
 		
 	-- Put HP+ gear and the AF head to make healing breath trigger more easily with this set.
 	sets.midcast.HB_Trigger = set_combine(sets.midcast.FastRecast, {head="Vishap Armet +2", back="Moonbeam Cape"})
@@ -105,7 +105,7 @@ function init_gear_sets()
 	-- Default set for any weaponskill that isn't any more specifically defined
 	
 	sets.precast.WS = {ammo="Knobkierrie",
-		head="Flam. Zucchetto +2",neck="Fotia Gorget",ear1="Brutal Earing",ear2="Sherida Earring",
+		head="Flam. Zucchetto +2",neck="Fotia Gorget",ear1="Brutal Earring",ear2="Sherida Earring", -- [2026-11-22 Fix] Was: "Brutal Earing"
 		body=gear.valorous_wsd_body,hands="Sulev. Gauntlets +2",ring1="Regal Ring",ring2="Niqmaddu Ring",
 		back="Brigantia's Mantle",waist="Fotia Belt",legs="Vishap Brais +3",feet="Flam. Gambieras +2"}
 		
@@ -309,44 +309,32 @@ state.AutoBreathMode = M(true, 'Auto Breath Mode')
 function check_breath()
 	use_equipment_items()
     
+	-- [2026-11-22 Fix] Was: returned false on first nil mob / 0 hpp / idle check instead of continuing loop, used unsquared distances (14, 6.25), unquoted buffactive[amnesia], and lacked post-loop return false
 	for i=1,party.count do
-		
-		if party[i].mob == nil and player.status == 'Engaged' then
-			return false
-		end
-		
-		if state.AutoBreathMode.value and player.status == 'Engaged' and pet.isvalid and (party[i].hpp < Breath_HPP - 15 or pet.hpp < 50) and party[i].mob.distance < 14  then
-			
+		if state.AutoBreathMode.value and player.status == 'Engaged' and pet.isvalid and party[i] and party[i].mob and party[i].hpp > 0 and party[i].mob.distance < 196 and (party[i].hpp < Breath_HPP - 15 or pet.hpp < 50) then -- [2026-11-22 Fix] Was: party[i].mob.distance < 14 (unsquared) and missing party[i]/mob/hpp > 0 guards
 			local abil_recasts = windower.ffxi.get_ability_recasts()
 			local spell_recasts = windower.ffxi.get_spell_recasts()
 			
-			--if party[i].buffactive.KO == nil then
-				--return false
-			if party[i].hpp == 0 then
-				return false
-			else
-				if abil_recasts[164] < latency and party[i].hpp < 30 and pet.distance < 6.25 and not buffactive[amnesia] then
-					windower.chat.input('/ja "Deep Breathing" <me>')
-					tickdelay = os.clock() + 1.1
-					return true
-				elseif abil_recasts[149] < latency and pet.distance < 6.25 and not buffactive[amnesia] then
-					windower.chat.input('/ja "Spirit Bond" <me>')
-					tickdelay = os.clock() + 1.1
-					return true
-				elseif abil_recasts[239] < latency and not buffactive[amnesia] then
-					windower.chat.input('/ja "Restoring Breath" <me>')
-					tickdelay = os.clock() + 5.1
-					return true
-				elseif spell_recasts[23] < spell_latency and (player.sub_job == 'WHM' or player.sub_job == 'RDM') then
-					windower.chat.input('/ma "Dia" <t>')
-					tickdelay = os.clock() + 1.1
-					return true
-				else
-					return false
-				end
+			if abil_recasts[164] < latency and party[i].hpp < 30 and pet.distance < 36 and not buffactive['Amnesia'] then -- [2026-11-22 Fix] Was: pet.distance < 6.25 and not buffactive[amnesia]
+				windower.chat.input('/ja "Deep Breathing" <me>')
+				tickdelay = os.clock() + 1.1
+				return true
+			elseif abil_recasts[149] < latency and pet.distance < 36 and not buffactive['Amnesia'] then -- [2026-11-22 Fix] Was: pet.distance < 6.25 and not buffactive[amnesia]
+				windower.chat.input('/ja "Spirit Bond" <me>')
+				tickdelay = os.clock() + 1.1
+				return true
+			elseif abil_recasts[239] < latency and not buffactive['Amnesia'] then -- [2026-11-22 Fix] Was: not buffactive[amnesia]
+				windower.chat.input('/ja "Restoring Breath" <me>')
+				tickdelay = os.clock() + 5.1
+				return true
+			elseif spell_recasts[23] < spell_latency and (player.sub_job == 'WHM' or player.sub_job == 'RDM') then
+				windower.chat.input('/ma "Dia" <t>')
+				tickdelay = os.clock() + 1.1
+				return true
 			end
         end
     end
+	return false
 end
 
 
@@ -360,10 +348,10 @@ res = require('resources')
 extdata = require('extdata')
  
 -- Item must be equipped for it to return any meaningful value.
-function is_enchant_ready(--[[name of item]]item)
-    local item_id, item = res.items:find(function(v) if v.name == item then return true end end)
+function is_enchant_ready(--[[name of item]]item_name) -- [2026-11-22 Fix] Was: parameter `item` (shadowed by `local item_id, item = ...`)
+    local item_id, item = res.items:find(function(v) if v.name == item_name then return true end end) -- [2026-11-22 Fix] Was: v.name == item
     local inventory = windower.ffxi.get_items()
-    local usable_bags = T{'inventory','wardrobe','wardrobe2','wardrobe3','wardrobe4'}
+    local usable_bags = T{'inventory','wardrobe','wardrobe2','wardrobe3','wardrobe4','wardrobe5','wardrobe6','wardrobe7','wardrobe8'} -- [2026-11-22 Fix] Was: missing wardrobe5..8
     local itemdata = {}
      
     for i,v in pairs(inventory) do
@@ -384,10 +372,10 @@ function is_enchant_ready(--[[name of item]]item)
     return false
 end
  
-function has_charges(--[[name of item]]item)
-    local item_id, item = res.items:find(function(v) if v.name == item then return true end end)
+function has_charges(--[[name of item]]item_name) -- [2026-11-22 Fix] Was: parameter `item` (shadowed by `local item_id, item = ...`)
+    local item_id, item = res.items:find(function(v) if v.name == item_name then return true end end) -- [2026-11-22 Fix] Was: v.name == item
     local inventory = windower.ffxi.get_items()
-    local bags = T{'inventory','safe','safe2','storage','satchel','locker','sack','case','wardrobe','wardrobe2','wardrobe3','wardrobe4'}
+    local bags = T{'inventory','safe','safe2','storage','satchel','locker','sack','case','wardrobe','wardrobe2','wardrobe3','wardrobe4','wardrobe5','wardrobe6','wardrobe7','wardrobe8'} -- [2026-11-22 Fix] Was: missing wardrobe5..8
     local itemdata = {}
      
     for i,v in pairs(inventory) do
@@ -416,7 +404,7 @@ function use_equipment_items()
 		--windowner.chat.input('"'..useItemName..'"')
 		if data.areas.cities:contains(world.area) and has_charges(useItemName) then
 		
-			windower.chat.input('/console gs c useitem back "Hi-Potion Tank"')
+			windower.chat.input('/console gs c useitem back "'..useItemName..'"') -- [2026-11-22 Fix] Was: hardcoded "Hi-Potion Tank"
 			
 		end
 	end

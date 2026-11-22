@@ -264,7 +264,7 @@ function init_gear_sets()
     sets.midcast['Enhancing Magic'].SIRD = {main="Colada",ammo="Staunch Tathlum +1",
 		head="Souv. Schaller +1",neck="Incanter's Torque",ear1="Andoaa Earring",ear2="Tuisto Earring",
 		body="Shab. Cuirass +1",hands="Souv. Handsch. +1",ring1="Defending Ring",ring2="Moonlight Ring",
-		back="Merciful Cape",waist="Olympus Sash",legs="Rev. Leggings +3",feet="Odyssean Greaves"}
+		back="Merciful Cape",waist="Olympus Sash",legs="Carmine Cuisses +1",feet="Odyssean Greaves"} -- [2026-11-22 Fix] Was: legs="Rev. Leggings +3" (feet item in legs slot)
 
 	sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {waist="Siegel Sash"})
 
@@ -482,8 +482,8 @@ function init_gear_sets()
         body="Rev. Surcoat +3",hands="Sulev. Gauntlets +2",ring1="Defending Ring",ring2="Moonlight Ring",
         back="Moonlight Cape",waist="Flume Belt +1",legs=gear.odyssean_fc_legs,feet="Cab. Leggings +1"}
 		
-    sets.engaged.Reraise = set_combine(sets.engaged.Tank, sets.Reraise)
-    sets.engaged.Acc.Reraise = set_combine(sets.engaged.Acc.Tank, sets.Reraise)
+    sets.engaged.Reraise = set_combine(sets.engaged.Tank, sets.Reraise or {}) -- [2026-11-22 Fix] Was: sets.Reraise (sets.Reraise is not defined yet)
+    sets.engaged.Acc.Reraise = set_combine(sets.engaged.Acc.Tank or sets.engaged.Tank, sets.Reraise or {}) -- [2026-11-22 Fix] Was: sets.engaged.Acc.Tank, sets.Reraise (neither is defined yet)
 		
 	--------------------------------------
 	-- Custom buff sets

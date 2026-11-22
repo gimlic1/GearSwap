@@ -66,7 +66,7 @@ function init_gear_sets()
 	sets.precast.FC = {ammo="Impatiens",
 		head="Carmine Mask +1",neck="Voltsurge Torque",ear1="Enchntr. Earring +1",ear2="Loquac. Earring",
 		body="Taeon Tabard",hands="Leyline Gloves",ring1="Lebeche Ring",ring2="Prolix Ring",
-		back="Moonlight Cape",waist="Flume Belt +1",legs="Founder's Greaves",feet="Carmine Greaves +1"}
+		back="Moonlight Cape",waist="Flume Belt +1",legs="Founder's Hose",feet="Carmine Greaves +1"} -- [2026-11-22 Fix] Was: legs="Founder's Greaves" (feet item in legs slot)
 	
 	-- Waltz set (chr and vit)
 	sets.precast.Waltz = {}
@@ -84,7 +84,7 @@ function init_gear_sets()
 	sets.midcast.FastRecast = {ammo="Staunch Tathlum +1",
 		head="Carmine Mask +1",neck="Voltsurge Torque",ear1="Enchntr. Earring +1",ear2="Loquac. Earring",
 		body="Taeon Tabard",hands="Leyline Gloves",ring1="Lebeche Ring",ring2="Prolix Ring",
-		back="Moonlight Cape",waist="Tempus Fugit",legs="Founder's Greaves",feet="Carmine Greaves +1"}
+		back="Moonlight Cape",waist="Tempus Fugit",legs="Founder's Hose",feet="Carmine Greaves +1"} -- [2026-11-22 Fix] Was: legs="Founder's Greaves" (feet item in legs slot)
 		
 	-- Put HP+ gear and the AF head to make healing breath trigger more easily with this set.
 	sets.midcast.HB_Trigger = set_combine(sets.midcast.FastRecast, {head="Vishap Armet +1"})

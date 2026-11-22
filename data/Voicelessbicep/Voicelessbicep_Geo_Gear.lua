@@ -59,7 +59,7 @@ function init_gear_sets()
 	sets.precast.JA['Concentric Pulse'] = {head="Bagua Galero +3"}
 	
 	-- Indi Duration in slots that would normally have skill here to make entrust more efficient.
-	sets.buff.Entrust = {}
+	sets.buff.Entrust = {main="Solstice",back=gear.idle_jse_back,legs="Bagua Pants +3",feet="Azimuth Gaiters +1"} -- [2026-11-22 Fix] Was: {}
 	
 	-- Relic hat for Blaze of Glory HP increase.
 	sets.buff['Blaze of Glory'] = {}
@@ -312,7 +312,7 @@ function init_gear_sets()
 		
     sets.defense.MEVA = {main="Malignance Pole",sub="Enki Strap",ammo="Staunch Tathlum +1",
         head="Nyame Helm",neck="Warder's Charm +1",ear1="Etiolation Earring",ear2="Sanare Earring",
-		body="Nyame Mail",hands="Nyame Gauntlets",ring1="Vengeful Ring",Ring2="Purity Ring",
+		body="Nyame Mail",hands="Nyame Gauntlets",ring1="Vengeful Ring",ring2="Purity Ring", -- [2026-11-22 Fix] Was: Ring2="Purity Ring"
         back=gear.nuke_jse_back,waist="Luminary Sash",legs="Nyame Flanchard",feet="Nyame Sollerets"}
 		
 	sets.defense.PetPDT = sets.idle.PDT.Pet
@@ -347,7 +347,7 @@ function init_gear_sets()
 	-- Normal melee group
 	sets.engaged = {ammo="Hasty Pinion +1",
 		head="Befouled Crown",neck="Asperity Necklace",ear1="Cessance Earring",ear2="Brutal Earring",
-		body="Jhakri Robe +2",hands="Gazu Bracelet +1",ring1="Ramuh Ring +1",ring2="Ramuh Ring +1",
+		body="Jhakri Robe +2",hands="Gazu Bracelets +1",ring1="Ramuh Ring +1",ring2="Ramuh Ring +1", -- [2026-11-22 Fix] Was: "Gazu Bracelet +1"
 		back="Kayapa Cape",waist="Witful Belt",legs="Assid. Pants +1",feet="Battlecast Gaiters"}
 		
 	sets.engaged.DW = {ammo="Hasty Pinion +1",

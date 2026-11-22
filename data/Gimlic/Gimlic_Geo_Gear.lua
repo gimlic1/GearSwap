@@ -50,13 +50,13 @@ function init_gear_sets()
 
 	-- Precast sets to enhance JAs
 	sets.precast.JA.Bolster = {body="Bagua Tunic +3"}
-	sets.precast.JA['Life Cycle'] = {body="Geo. Tunic +2",back=gear.idle_jse_back}
+	sets.precast.JA['Life Cycle'] = {body="Geomancy Tunic +2",back=gear.idle_jse_back} -- [2026-11-22 Fix] Was: body="Geo. Tunic +2" (+2 Relic body is unabbreviated in res/items.lua)
 	sets.precast.JA['Radial Arcana'] = {feet="Bagua Sandals +3"}
 	sets.precast.JA['Mending Halation'] = {legs="Bagua Pants +3"}
 	sets.precast.JA['Full Circle'] = {head="Azimuth Hood +1",hands="Bagua Mitaines +3"}
 	
 	-- Indi Duration in slots that would normally have skill here to make entrust more efficient.
-	sets.buff.Entrust = {}
+	sets.buff.Entrust = {main="Solstice",back=gear.idle_jse_back,legs="Bagua Pants +3",feet="Azimuth Gaiters +1"} -- [2026-11-22 Fix] Was: {} (populate Indi duration gear for Entrust)
 	
 	-- Relic hat for Blaze of Glory HP increase.
 	sets.buff['Blaze of Glory'] = {}
@@ -64,7 +64,7 @@ function init_gear_sets()
 	-- Fast cast sets for spells
 
 	sets.precast.FC = {main=gear.grioavolr_fc_staff,sub="Clerisy Strap +1",ammo="Sapience Orb",
-		head="Amalric Coif ",neck="Voltsurge Torque",ear1="Etiolation Earring",ear2="Moonshade Earring",
+		head="Amalric Coif",neck="Voltsurge Torque",ear1="Etiolation Earring",ear2="Moonshade Earring", -- [2026-11-22 Fix] Was: head="Amalric Coif " (trailing space broke exact name_match)
 		body="Shango Robe",hands="Volte Gloves",ring1="Kishar Ring",ring2="Lebeche Ring",
 		back="Perimede Cape",waist="Witful Belt",legs="Geomancy Pants +3",feet="Regal Pumps +1"}
 
@@ -101,7 +101,7 @@ function init_gear_sets()
 	--------------------------------------
 
     sets.midcast.FastRecast = {main=gear.grioavolr_fc_staff,sub="Clerisy Strap +1",
-		head="Amalric Coif ",neck="Voltsurge Torque",ear1="Enchntr. Earring +1",ear2="Malignance Earring",
+		head="Amalric Coif",neck="Voltsurge Torque",ear1="Enchntr. Earring +1",ear2="Malignance Earring", -- [2026-11-22 Fix] Was: head="Amalric Coif " (trailing space broke exact name_match)
 		body="Zendik Robe",hands="Volte Gloves",ring1="Kishar Ring",ring2="Prolix Ring",
 		back="Lifestream Cape",waist="Witful Belt",legs="Geomancy Pants +3",feet="Regal Pumps +1"}
 
@@ -115,18 +115,18 @@ function init_gear_sets()
 	sets.midcast.Geomancy.Indi = set_combine(sets.midcast.Geomancy, {main="Solstice",back=gear.idle_jse_back,legs="Bagua Pants +3",feet="Azimuth Gaiters +1"})
 		
     sets.midcast.Cure = {main=gear.gada_healing_club,sub="Sors Shield",ammo="Hasty Pinion +1",
-        head="Amalric Coif ",neck="Incanter's Torque",ear1="Nourish. Earring",ear2="Etiolation Earring",
+        head="Amalric Coif",neck="Incanter's Torque",ear1="Nourish. Earring",ear2="Etiolation Earring", -- [2026-11-22 Fix] Was: head="Amalric Coif " (trailing space broke exact name_match)
         body="Zendik Robe",hands="Telchine Gloves",ring1="Janniston Ring",ring2="Menelaus's Ring",
         back="Tempered Cape +1",waist="Witful Belt",legs="Geomancy Pants +3",feet="Vanya Clogs"}
 		
     sets.midcast.LightWeatherCure = {main="Chatoyant Staff",sub="Curatio Grip",ammo="Hasty Pinion +1",
-        head="Amalric Coif ",neck="Phalaina Locket",ear1="Nourish. Earring",ear2="Etiolation Earring",
+        head="Amalric Coif",neck="Phalaina Locket",ear1="Nourish. Earring",ear2="Etiolation Earring", -- [2026-11-22 Fix] Was: head="Amalric Coif " (trailing space broke exact name_match)
         body="Vrikodara Jupon",hands="Telchine Gloves",ring1="Janniston Ring",ring2="Menelaus's Ring",
         back="Twilight Cape",waist="Hachirin-no-Obi",legs="Geomancy Pants +3",feet="Vanya Clogs"}
 		
 		--Cureset for if it's not light weather but is light day.
     sets.midcast.LightDayCure = {main=gear.gada_healing_club,sub="Sors Shield",ammo="Hasty Pinion +1",
-        head="Amalric Coif ",neck="Incanter's Torque",ear1="Nourish. Earring",ear2="Etiolation Earring",
+        head="Amalric Coif",neck="Incanter's Torque",ear1="Nourish. Earring",ear2="Etiolation Earring", -- [2026-11-22 Fix] Was: head="Amalric Coif " (trailing space broke exact name_match)
         body="Zendik Robe",hands="Telchine Gloves",ring1="Janniston Ring",ring2="Lebeche Ring",
         back="Twilight Cape",waist="Hachirin-no-Obi",legs="Geomancy Pants +3",feet="Vanya Clogs"}
 
@@ -185,12 +185,12 @@ function init_gear_sets()
     sets.midcast.Aspir = sets.midcast.Drain
 		
 	sets.midcast.Stun = {main=gear.grioavolr_fc_staff,sub="Clerisy Strap +1",ammo="Hasty Pinion +1",
-		head="Amalric Coif ",neck="Voltsurge Torque",ear1="Enchntr. Earring +1",ear2="Malignance Earring",
+		head="Amalric Coif",neck="Voltsurge Torque",ear1="Enchntr. Earring +1",ear2="Malignance Earring", -- [2026-11-22 Fix] Was: head="Amalric Coif " (trailing space broke exact name_match)
 		body="Zendik Robe",hands="Volte Gloves",ring1="Metamor. Ring +1",ring2="Stikini Ring +1",
 		back="Lifestream Cape",waist="Witful Belt",legs="Psycloth Lappas",feet="Regal Pumps +1"}
 		
 	sets.midcast.Stun.Resistant = {main="Daybreak",sub="Ammurapi Shield",ammo="Pemphredo Tathlum",
-		head="Amalric Coif ",neck="Erra Pendant",ear1="Regal Earring",ear2="Malignance Earring",
+		head="Amalric Coif",neck="Erra Pendant",ear1="Regal Earring",ear2="Malignance Earring", -- [2026-11-22 Fix] Was: head="Amalric Coif " (trailing space broke exact name_match)
 		body="Zendik Robe",hands="Amalric Gages",ring1="Metamor. Ring +1",ring2="Stikini Ring +1",
 		back=gear.nuke_jse_back,waist="Acuity Belt +1",legs="Nyame Flanchard",feet=gear.merlinic_aspir_feet}
 		
@@ -216,11 +216,11 @@ function init_gear_sets()
 		body="Geomancy Tunic +2",hands="Geo. Mitaines +2",ring1="Metamor. Ring +1",ring2="Stikini Ring +1",
 		back=gear.nuke_jse_back,waist="Luminary Sash",legs="Geomancy Pants +3",feet="Geo. Sandals +3"}
 		
-    sets.midcast.ElementalEnfeeble = set_combine(sets.midcast['Enfeebling Magic'], {head="Amalric Coif ",ear2="Malignance Earring",waist="Acuity Belt +1"})
-    sets.midcast.ElementalEnfeeble.Resistant = set_combine(sets.midcast['Enfeebling Magic'].Resistant, {head="Amalric Coif ",ear2="Malignance Earring",waist="Acuity Belt +1"})
+    sets.midcast.ElementalEnfeeble = set_combine(sets.midcast['Enfeebling Magic'], {head="Amalric Coif",ear2="Malignance Earring",waist="Acuity Belt +1"}) -- [2026-11-22 Fix] Was: head="Amalric Coif " (trailing space broke exact name_match)
+    sets.midcast.ElementalEnfeeble.Resistant = set_combine(sets.midcast['Enfeebling Magic'].Resistant, {head="Amalric Coif",ear2="Malignance Earring",waist="Acuity Belt +1"}) -- [2026-11-22 Fix] Was: head="Amalric Coif " (trailing space broke exact name_match)
 	
-	sets.midcast.IntEnfeebles = set_combine(sets.midcast['Enfeebling Magic'], {head="Amalric Coif ",ear2="Malignance Earring",waist="Acuity Belt +1"})
-	sets.midcast.IntEnfeebles.Resistant = set_combine(sets.midcast['Enfeebling Magic'].Resistant, {head="Amalric Coif ",ear2="Malignance Earring",waist="Acuity Belt +1"})
+	sets.midcast.IntEnfeebles = set_combine(sets.midcast['Enfeebling Magic'], {head="Amalric Coif",ear2="Malignance Earring",waist="Acuity Belt +1"}) -- [2026-11-22 Fix] Was: head="Amalric Coif " (trailing space broke exact name_match)
+	sets.midcast.IntEnfeebles.Resistant = set_combine(sets.midcast['Enfeebling Magic'].Resistant, {head="Amalric Coif",ear2="Malignance Earring",waist="Acuity Belt +1"}) -- [2026-11-22 Fix] Was: head="Amalric Coif " (trailing space broke exact name_match)
 	
 	sets.midcast.MndEnfeebles = set_combine(sets.midcast['Enfeebling Magic'], {range=empty,ring1="Stikini Ring +1"})
 	sets.midcast.MndEnfeebles.Resistant = set_combine(sets.midcast['Enfeebling Magic'].Resistant, {range=empty,ring1="Stikini Ring +1"})
@@ -240,9 +240,9 @@ function init_gear_sets()
 		
 	--sets.midcast.Stoneskin = set_combine(sets.midcast['Enhancing Magic'], {neck="Nodens Gorget",ear2="Earthcry Earring",waist="Siegel Sash",legs="Shedir Seraweels"})
 	
-	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {head="Amalric Coif "})
+	sets.midcast.Refresh = set_combine(sets.midcast['Enhancing Magic'], {head="Amalric Coif"}) -- [2026-11-22 Fix] Was: head="Amalric Coif " (trailing space broke exact name_match)
 	
-	sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {main="Vadose Rod",sub="Genbu's Shield",head="Amalric Coif ",hands="Regal Cuffs",waist="Emphatikos Rope",legs="Shedir Seraweels"})
+	sets.midcast.Aquaveil = set_combine(sets.midcast['Enhancing Magic'], {main="Vadose Rod",sub="Genbu's Shield",head="Amalric Coif",hands="Regal Cuffs",waist="Emphatikos Rope",legs="Shedir Seraweels"}) -- [2026-11-22 Fix] Was: head="Amalric Coif " (trailing space broke exact name_match)
 	
 	sets.midcast.BarElement = set_combine(sets.precast.FC['Enhancing Magic'], {legs="Shedir Seraweels"})
 	
@@ -309,7 +309,7 @@ function init_gear_sets()
 		
     sets.defense.MEVA = {main="Malignance Pole",sub="Enki Strap",ammo="Staunch Tathlum +1",
         head="Azimuth Hood +1",neck="Warder's Charm +1",ear1="Etiolation Earring",ear2="Sanare Earring",
-		body="Bagua Tunic +3",hands="Telchine Gloves",ring1="Vengeful Ring",Ring2="Purity Ring",
+		body="Bagua Tunic +3",hands="Telchine Gloves",ring1="Vengeful Ring",ring2="Purity Ring", -- [2026-11-22 Fix] Was: Ring2="Purity Ring"
         back="Moonbeam Cape",waist="Luminary Sash",legs="Telchine Braconi",feet="Azimuth Gaiters +1"}
 		
 	sets.defense.PetPDT = sets.idle.PDT.Pet
@@ -344,7 +344,7 @@ function init_gear_sets()
 	-- Normal melee group
 	sets.engaged = {ammo="Hasty Pinion +1",
 		head="Befouled Crown",neck="Asperity Necklace",ear1="Cessance Earring",ear2="Brutal Earring",
-		body="Jhakri Robe +2",hands="Gazu Bracelet +1",ring1="Ramuh Ring +1",ring2="Ramuh Ring +1",
+		body="Jhakri Robe +2",hands="Gazu Bracelets +1",ring1="Ramuh Ring +1",ring2="Ramuh Ring +1", -- [2026-11-22 Fix] Was: hands="Gazu Bracelet +1"
 		back="Kayapa Cape",waist="Witful Belt",legs="Assid. Pants +1",feet="Battlecast Gaiters"}
 		
 	sets.engaged.DW = {ammo="Hasty Pinion +1",

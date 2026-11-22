@@ -207,7 +207,7 @@ function job_tick()
 	if check_hasso() then return true end
 	if check_jump() then return true end
 	if check_buff() then return true end
-	if check_breath() then return true end
+	if check_breath and check_breath() then return true end -- [2026-11-22 Fix] Was: if check_breath() then return true end (Guard check_breath for characters whose DRG_Gear.lua does not define it)
 	return false
 end
 
@@ -276,7 +276,7 @@ function check_buff()
 			windower.chat.input('/ja "Call Wyvern" <me>')
 			tickdelay = os.clock() + 1.1
 			return true
-		elseif abil_recasts[149] < latency and pet.isvalid and pet.distance < 6.25 and not buffactive[amnesia] then
+		elseif abil_recasts[149] < latency and pet.isvalid and pet.distance < 36 and not buffactive['Amnesia'] and not buffactive['Spirit Bond'] then -- [2026-11-22 Fix] Was: pet.distance < 6.25 and not buffactive[amnesia] (unquoted amnesia was nil; pet.distance is squared yalms so 36 = 6 yalms)
 			windower.chat.input('/ja "Spirit Bond" <me>')
 			tickdelay = os.clock() + 1.1
 			return true
