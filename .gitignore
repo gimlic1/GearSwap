@@ -33,3 +33,16 @@ libs/closetCleaner.lua
 Rename.bat
 Modes.lua
 organizer-lib.lua
+# Track personal character GearSwap configs and docs in fork
+!data/Gimlic/
+!data/Gimlic/**
+!data/Voicelessbicep/
+!data/Voicelessbicep/**
+!data/Balullu/
+!data/Balullu/**
+!data/Friendlessvirus/
+!data/Friendlessvirus/**
+!data/User/
+!data/User/**
+!docs/
+!docs/**

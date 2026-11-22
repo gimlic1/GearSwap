@@ -207,6 +207,7 @@ function job_tick()
 	if check_hasso() then return true end
 	if check_jump() then return true end
 	if check_buff() then return true end
+	if check_breath() then return true end
 	return false
 end
 
@@ -273,6 +274,10 @@ function check_buff()
 
 		if not pet.isvalid and abil_recasts[163] < latency then
 			windower.chat.input('/ja "Call Wyvern" <me>')
+			tickdelay = os.clock() + 1.1
+			return true
+		elseif abil_recasts[149] < latency and pet.isvalid and pet.distance < 6.25 and not buffactive[amnesia] then
+			windower.chat.input('/ja "Spirit Bond" <me>')
 			tickdelay = os.clock() + 1.1
 			return true
 		elseif state.Buff['SJ Restriction'] then

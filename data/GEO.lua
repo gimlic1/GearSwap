@@ -733,6 +733,8 @@ buff_spell_lists = {
 		{Name='Haste',		Buff='Haste',		SpellID=57,		When='Always'},
 		{Name='Refresh',	Buff='Refresh',		SpellID=109,	When='Always'},
 		{Name='Stoneskin',	Buff='Stoneskin',	SpellID=54,		When='Always'},
+		{Name='Aquaveil',	Buff='Aquaveil',	SpellID=55,		When='Always'},
+		{Name='Phalanx',	Buff='Phalanx',		SpellID=106,	When='Always'},
 	},
 
 	Default = {

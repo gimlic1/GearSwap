@@ -76,7 +76,7 @@ EnhancingAbility = S{"Haste","Haste II","Flurry","Flurry II","Adloquium","Errati
 				 }
 
 function check_reaction(act)
-
+--windower.add_to_chat(200, 'test')
 	--Gather Info
     local curact = T(act)
     local actor = T{}
@@ -100,7 +100,7 @@ function check_reaction(act)
     else
 		isTarget = false
     end
-
+--if curact.targets[1].id == nil then windower.add_to_chat(200 'nill') else windower.add_to_chat(200 'curact.targets[1].id: ' .. curact.targets[1].id..' player.id: '..player.id)end
 	if curact.targets[1].id == nil then
 		targetsMe = false
 		targetsSelf = false
@@ -238,8 +238,9 @@ function check_reaction(act)
 	elseif midaction() or curact.category ~= 8 or state.DefenseMode.value ~= 'None' or ((petWillAct + 2) > os.clock()) then
 			
 	elseif targetsMe then
+				--windower.add_to_chat(200, 'test')
 		if CureAbility:contains(act_info.name) and player.hpp < 75 then
-			if sets.Cure_Received then
+			if sets.Cure_Received and not targetsSelf then
 				do_equip('sets.Cure_Received')
 			elseif sets.Self_Healing then
 				do_equip('sets.Self_Healing') 
@@ -260,12 +261,13 @@ function check_reaction(act)
 			end
 			return
 		elseif ProshellAbility:contains(act_info.name) then
+			--windower.add_to_chat(200, 'test sheltered')
 			if sets.Sheltered then do_equip('sets.Sheltered') return end
 		end
 	elseif actor.in_party and otherTarget.in_party and targetsDistance < 10 then
 
 		if CuragaAbility:contains(act_info.name) and player.hpp < 75 then
-			if sets.Cure_Received then
+			if sets.Cure_Received and not targetsSelf then
 				do_equip('sets.Cure_Received')
 			elseif sets.Self_Healing then
 				do_equip('sets.Self_Healing') 
