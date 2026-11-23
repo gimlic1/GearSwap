@@ -13,7 +13,7 @@
 > - **Default Macro Book / Lockstyle:** Book `10`, Page `4` (both) | `Gimlic`: `/lockstyleset 11`, `Voicelessbicep`: `/lockstyleset 1` *(both run `lua unload SKillchains`)*
 > - **Key Automation Flags:** `AutoGeoAbilities = true` (auto `Blaze of Glory` + `Ecliptic Attrition`), `AutoEntrust = false` (manual Indi targeting), `CombatEntrustOnly = true`, `ShowDistance = true`
 
-Comprehensive code, command, and character gear reference for Kevin's Selindrile Geomancer setup, anchored by `Voicelessbicep` (`Idris` main GEO) and `Gimlic` (secondary GEO).
+Comprehensive code, command, and character gear reference for Gimlic's Selindrile Geomancer setup, anchored by `Voicelessbicep` (`Idris` main GEO) and `Gimlic` (secondary GEO).
 
 ---
 

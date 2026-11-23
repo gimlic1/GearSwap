@@ -13,7 +13,7 @@
 > - **Default Macro Book / Lockstyle:** Book `4`, Page `10` (`Gimlic` / `Voicelessbicep` / `Balullu`) | `/lockstyleset 6` (`Gimlic` also runs `lua unload SKillchains`)
 > - **Key Automation Flags:** `AutoArts = true` (global), `AutoCaress = true`, `BlockLowDevotion = true`, `Gambanteinn = false`, `AutoHealMode = false` *(custom)*
 
-Comprehensive code, command, and character gear reference for Kevin's Selindrile White Mage setup across `Gimlic`, `Voicelessbicep`, `Balullu`, and `Friendlessvirus`.
+Comprehensive code, command, and character gear reference for Gimlic's Selindrile White Mage setup across `Gimlic`, `Voicelessbicep`, `Balullu`, and `Friendlessvirus`.
 
 ---
 
@@ -35,7 +35,7 @@ Comprehensive code, command, and character gear reference for Kevin's Selindrile
 | `state.Gambanteinn` | `false` (bool) | `WHM.lua` | Equips `Gambanteinn` on `Cursna` midcast if available (ignored if subjob is `NIN`/`DNC` with `sets.midcast.DWCursna`) |
 | `state.BlockLowDevotion` | `true` (bool) | `WHM.lua` | Cancels `Devotion` when WHM is below 50% HP to prevent low-MP transfers |
 | `state.AutoBuffMode` | `'Off'`, `'Auto'` (etc. via `Sel-Include`) | `Sel-Include` + `WHM.lua` | Drives `check_arts()` and `check_buff()` (`Reraise IV`, `Haste`, `Aurorastorm`, `Refresh`, `Stoneskin`) |
-| `state.AutoHealMode` *(custom)* | `false` (bool) | `Gimlic` / `Voicelessbicep` / `Balullu` | Custom flag for Kevin's `check_heal()` routine *(see Gotchas below)* |
+| `state.AutoHealMode` *(custom)* | `false` (bool) | `Gimlic` / `Voicelessbicep` / `Balullu` | Custom flag for Gimlic's `check_heal()` routine *(see Gotchas below)* |
 
 ### Job-Specific Keybinds (`*_Whm_Gear.lua`)
 
@@ -121,7 +121,7 @@ All handlers below live in `WHM.lua` (`job_self_command`, lines 374–382) or Se
 > [!WARNING]
 > **Code Bugs & Gotchas Discovered in WHM Files**
 > 1. **`WHM.lua` line 290 (upstream Selindrile typo):** Returns `'"MeleeLightWeatherCureSolace'` with an extra leading `"` — so `MeleeLightWeatherCureSolace` will never match while meleeing in Light weather with Solace up.
-> 2. **Custom `check_heal()` is currently NOT wired into `job_tick()`:** `Gimlic`, `Voicelessbicep`, and `Balullu` all define `state.AutoHealMode` (`Win+F1`) and a custom `check_heal()` function (Doom/Charm → Status Removals → Arise/Devotion → `/SCH` Accession+Stoneskin), but `WHM.lua`'s `job_tick()` only calls `check_arts()`, `check_buff()`, and `check_buffup()`. Because `user_job_tick()` is not defined to call `check_heal()`, toggling `Win+F1` currently has no effect (Kevin uses `FFXI Addon — HealBot` for active auto-healing).
+> 2. **Custom `check_heal()` is currently NOT wired into `job_tick()`:** `Gimlic`, `Voicelessbicep`, and `Balullu` all define `state.AutoHealMode` (`Win+F1`) and a custom `check_heal()` function (Doom/Charm → Status Removals → Arise/Devotion → `/SCH` Accession+Stoneskin), but `WHM.lua`'s `job_tick()` only calls `check_arts()`, `check_buff()`, and `check_buffup()`. Because `user_job_tick()` is not defined to call `check_heal()`, toggling `Win+F1` currently has no effect (Gimlic uses `FFXI Addon — HealBot` for active auto-healing).
 > 3. **Bugs inside `check_heal()` if ever re-enabled:**
 >    - On `Gimlic` and `Voicelessbicep`, the Doom/Charm and Debuff loops were narrowed to `for i=1,1 do` (only checks `party[1]`; `Balullu` still has `for i=1,party.count do`).
 >    - `party[i].buffactive.poision` (misspelled `poison`), `party[i].buffactive.Curse` (capital `C`), and `/ma "Stone Skin" <me>` (space in `Stoneskin`).

@@ -11,7 +11,7 @@
 > - **Default Macro Book / Lockstyle (`Gimlic`):** Book `20`, Page `2` (all subjobs) | `/lockstyleset 9` *(also runs `lua load SKillchains`)*
 > - **Key Automation Flags:** `AutoPuppetMode = false` (`Win+F8`), `AutoRepairMode = true` (`Win+F7`, `repairhpp = 45`), `AutoDeployMode = true`, `AutoPetMode = true`, `PetWSGear = true`, `PetEnmityGear = true`, `deactivatehpp = 85`
 
-Comprehensive code, command, and character gear reference for Kevin's Selindrile Puppetmaster setup, centered on `Gimlic`'s Mythic `Kenkonken` / `Godhands` / `Xiucoatl` Puppetmaster build.
+Comprehensive code, command, and character gear reference for Gimlic's Selindrile Puppetmaster setup, centered on `Gimlic`'s Mythic `Kenkonken` / `Godhands` / `Xiucoatl` Puppetmaster build.
 
 ---
 
@@ -131,7 +131,7 @@ Runs in strict priority order:
   - `sets.weapons.Xiucoatl`: **`Xiucoatl`** (Oboro Su5 H2H) + `Animator P +1`
   - `sets.weapons.Trial`: `Knuckles of Trials` + `Animator P +1`
 - **Custom Maneuver Overrides (`defaultManeuvers`):**
-  - **`Tank` (customized by Kevin):** **`Fire x1`**, **`Light x1`**, **`Water x1`** (changed from stock `Earth x1, Fire x1, Light x1` — noted with inline comments `--normally 1` on Earth and `-- normally 0` on Water, likely for Overdrive / magic-heavy or Regen/Auto-Repair-focused tanking).
+  - **`Tank` (customized by Gimlic):** **`Fire x1`**, **`Light x1`**, **`Water x1`** (changed from stock `Earth x1, Fire x1, Light x1` — noted with inline comments `--normally 1` on Earth and `-- normally 0` on Water, likely for Overdrive / magic-heavy or Regen/Auto-Repair-focused tanking).
   - Other presets follow stock defaults: `Melee` (`Fire/Thunder/Wind`), `Ranged` (`Wind x3`), `HybridRanged` (`Wind/Fire/Light`), `LightTank` (`Earth/Fire/Light`), `Magic` (`Light/Ice/Dark`), `Heal` (`Light x2 / Dark`), `Nuke` (`Ice x2 / Dark`).
 - **Full JSE +3 & Empyrean +1 Wardrobe (tracked in `PorterPacker/data/Gimlic_PUP.lua`):**
   - **Artifact (`Foire +3`):** Full 5/5 `+3` (`Foire Taj/Tobe/Dastanas/Churidars/Babouches +3`)

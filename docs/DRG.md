@@ -2,7 +2,7 @@
 
 > [!NOTE]
 > **Quick Reference**
-> - **Logic File:** `C:\Windower\addons\GearSwap\data\DRG.lua` — **CUSTOMIZED BY KEVIN** (hooks `check_breath()` in `job_tick()` and adds automatic `Spirit Bond` in `check_buff()`)
+> - **Logic File:** `C:\Windower\addons\GearSwap\data\DRG.lua` — **CUSTOMIZED BY GIMLIC** (hooks `check_breath()` in `job_tick()` and adds automatic `Spirit Bond` in `check_buff()`)
 > - **Character Gear Files & Customization Status:**
 >   - `Gimlic\Gimlic_Drg_Gear.lua` — **Heavily customized flagship DRG** (`Trishula`, `Gungnir`, `Naegling`, `Exalted Staff`, full `Vishap +3` & `Pteroslaver +3`, `Gleti's`, `Nyame`, `Hjarrandi Breast.`, `Hybrid` offense mode, custom `check_breath()` + `AutoBreathMode`, lockstyle `3`)
 >   - `Voicelessbicep\Voicelessbicep_Drg_Gear.lua` — **Heavily customized DRG** (`Gungnir`, `Dream Bell`, `Pteroslaver +3`, `Vishap +3` legs/feet, `Geirskogul` default AutoWS, custom `check_breath()` + city `use_equipment_items()` Potion Tank helper, lockstyle `3`)
@@ -12,7 +12,7 @@
 > - **Default Macro Book / Lockstyle:** Book `1`, Page `9` (all subjobs) | `/lockstyleset 3` (`Gimlic` also runs `lua load SKillchains`)
 > - **Key Automation Flags:** `AutoBreathMode = true` *(custom, `Win+F1`)*, `AutoBondMode = true`, `AutoJumpMode = false` (`Win+F7`), `Stance = 'Hasso'` (`Ctrl+Alt+Win+~`)
 
-Comprehensive code, command, and character gear reference for Kevin's heavily customized Selindrile Dragoon setup — including Kevin's direct edits to `DRG.lua` and custom Wyvern Auto-Healing-Breath engine.
+Comprehensive code, command, and character gear reference for Gimlic's heavily customized Selindrile Dragoon setup — including Gimlic's direct edits to `DRG.lua` and custom Wyvern Auto-Healing-Breath engine.
 
 ---
 
@@ -34,7 +34,7 @@ Comprehensive code, command, and character gear reference for Kevin's heavily cu
 | `state.Stance` | `'Hasso'`, `'Seigan'`, `'None'` | `DRG.lua` | Auto-maintained `/SAM` stance when engaged with a 2H polearm |
 | `state.AutoJumpMode` | `false` (bool) | `DRG.lua` | Auto-fires Jumps & `Spirit Link` when engaged and `player.tp < 501` |
 | `state.AutoBondMode` | `true` (bool) | `DRG.lua` | Auto-pairs `Spirit Bond` before `Restoring Breath` (when pet `<75%` HP) and cancels `Spirit Bond` right after |
-| `state.AutoBreathMode` *(custom)* | `true` (bool) | `Gimlic_Drg_Gear.lua` & `Voicelessbicep_Drg_Gear.lua` | Toggles Kevin's custom `check_breath()` automatic party/wyvern healing breath engine |
+| `state.AutoBreathMode` *(custom)* | `true` (bool) | `Gimlic_Drg_Gear.lua` & `Voicelessbicep_Drg_Gear.lua` | Toggles Gimlic's custom `check_breath()` automatic party/wyvern healing breath engine |
 
 ### Job-Specific Keybinds (`Gimlic_Drg_Gear.lua` & `Voicelessbicep_Drg_Gear.lua`)
 
@@ -46,7 +46,7 @@ Comprehensive code, command, and character gear reference for Kevin's heavily cu
 | `Alt+~` (`!` + `` ` ``) | `input /ja "Seigan" <me>` | Activate `Seigan` (`/SAM`) |
 | `Win+~` (`@` + `` ` ``) | `gs c cycle SkillchainMode` | Cycle Skillchain helper mode |
 | `Ctrl+Alt+Win+~` | `gs c cycle Stance` | Cycle auto-stance (`Hasso` / `Seigan` / `None`) |
-| `Win+F1` | `gs c toggle AutoBreathMode` | Toggle Kevin's custom `AutoBreathMode` (`check_breath()`) |
+| `Win+F1` | `gs c toggle AutoBreathMode` | Toggle Gimlic's custom `AutoBreathMode` (`check_breath()`) |
 | `Win+F7` | `gs c toggle AutoJumpMode` | Toggle automatic Jump + `Spirit Link` rotation under 501 TP |
 | `Ctrl+F11` | `gs c cycle MagicalDefenseMode` | Cycle `MDT` / `MDTReraise` |
 | `Ctrl+\` | `input /ma "Protectra V" <me>` | Cast `Protectra V` *(inherited bind; non-applicable on DRG)* |
@@ -61,7 +61,7 @@ Comprehensive code, command, and character gear reference for Kevin's heavily cu
 
 | Command | Arguments | Behavior | Macro Example |
 | :--- | :--- | :--- | :--- |
-| `//gs c toggle AutoBreathMode` | None | Enables/disables Kevin's custom Wyvern auto-healing-breath loop (`check_breath()`). | `/con gs c toggle AutoBreathMode` |
+| `//gs c toggle AutoBreathMode` | None | Enables/disables Gimlic's custom Wyvern auto-healing-breath loop (`check_breath()`). | `/con gs c toggle AutoBreathMode` |
 | `//gs c toggle AutoJumpMode` | None | Toggles automatic Jump & `Spirit Link` rotation while engaged under `501` TP. | `/con gs c toggle AutoJumpMode` |
 | `//gs c toggle AutoBondMode` | None | Toggles auto-`Spirit Bond` wrapping around `Restoring Breath`. | `/con gs c toggle AutoBondMode` |
 | `//gs c cycle Stance` *(or `set Stance Hasso`)* | `Hasso`, `Seigan`, `None` | Selects which `/SAM` stance `check_hasso()` maintains automatically. | `/con gs c set Stance Seigan` |
@@ -103,9 +103,9 @@ Comprehensive code, command, and character gear reference for Kevin's heavily cu
    - `Spirit Jump` (ID `166`) → `Soul Jump` (ID `167`) → `Jump` (ID `158`) → `High Jump` (ID `159`) → `Spirit Link` (ID `162`, only if Wyvern is out and `pet.tp > 350`).
 3. **`check_buff()` (lines 270–303):** When `AutoBuffMode ~= 'Off'` and `player.in_combat`:
    - Summons Wyvern via **`Call Wyvern`** (ID `163`) if not out.
-   - **[Kevin Custom Edit — line 279]:** Automatically activates **`Spirit Bond`** (ID `149`) when Wyvern is within `6.25` yalms!
+   - **[Gimlic Custom Edit — line 279]:** Automatically activates **`Spirit Bond`** (ID `149`) when Wyvern is within `6.25` yalms!
    - Maintains subjob offensive buffs: `/DRK` `Last Resort` (ID `87`), `/WAR` `Berserk` (ID `1`) and `Aggressor` (ID `4`).
-4. **`check_breath()` — [Kevin Custom Hook, line 210 in `DRG.lua`, implemented in `Gimlic_Drg_Gear.lua` & `Voicelessbicep_Drg_Gear.lua`]:**
+4. **`check_breath()` — [Gimlic Custom Hook, line 210 in `DRG.lua`, implemented in `Gimlic_Drg_Gear.lua` & `Voicelessbicep_Drg_Gear.lua`]:**
    - Scans `party[1..party.count]` while `AutoBreathMode = true`, `Engaged`, and Wyvern is out.
    - Triggers when any living party member within `14` yalms drops below `Breath_HPP - 15` (e.g., `< 50%` on mage subjob with `Vishap Armet`, `< 45%` on non-mage default `Breath_HPP = 60`) OR when `pet.hpp < 50`:
      1. **`Deep Breathing`** (ID `164`) if party member `< 30%` HP and pet `< 6.25` yalms.
